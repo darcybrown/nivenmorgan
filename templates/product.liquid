@@ -1,52 +1,52 @@
 <div id="productpage">
 
-	<div id="productimages"><div id="productimages-top"><div id="productimages-bottom">
-		{% for image in product.images %}
-			{% if forloop.first %}
-				<a href="{{ image | product_img_url: 'large' }}" class="productimage" rel="lightbox" title="{{product.title | escape }}">
-				  <img src="{{ image | product_img_url: 'medium'}}" alt="{{product.title | escape }}" />
-				</a>
-			{% else %}
-				<a href="{{ image | product_img_url: 'large' }}" class="productimage-small" rel="lightbox" title="{{product.title | escape }}">
-				  <img src="{{ image | product_img_url: 'small'}}" alt="{{product.title | escape }}" />
-				</a>
-			{% endif %}
-		{% endfor %}
-	</div></div></div>
+  <div id="productimages"><div id="productimages-top"><div id="productimages-bottom">
+    {% for image in product.images %}
+      {% if forloop.first %}
+        <a href="{{ image | product_img_url: 'large' }}" class="productimage" rel="lightbox" title="{{product.title | escape }}">
+          <img src="{{ image | product_img_url: 'medium'}}" alt="{{product.title | escape }}" />
+        </a>
+      {% else %}
+        <a href="{{ image | product_img_url: 'large' }}" class="productimage-small" rel="lightbox" title="{{product.title | escape }}">
+          <img src="{{ image | product_img_url: 'small'}}" alt="{{product.title | escape }}" />
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div></div></div>
 
   <div id="productdetails">
-	  <h2>{{ product.title }}</h2>
-	  
-	  <ul id="details" class="hlist">
-		<li>Vendor: {{ product.vendor | link_to_vendor }}</li>
-		<li>Type: {{ product.type | link_to_type }}</li>
-	  </ul>
-	  
-	  <small>{{ product.price_min | money }}{% if product.price_varies %} - {{ product.price_max | money }}{% endif %}</small>
-		
-	  <div id="productcontrols">
+    <h2>{{ product.title }}</h2>
+    
+    <ul id="details" class="hlist">
+    <li>Vendor: {{ product.vendor | link_to_vendor }}</li>
+    <li>Type: {{ product.type | link_to_type }}</li>
+    </ul>
+    
+    <small>{{ product.price_min | money }}{% if product.price_varies %} - {{ product.price_max | money }}{% endif %}</small>
+    
+    <div id="productcontrols">
               {% if product.available %}
 
-		<form action="/cart/add" method="post">
+    <form action="/cart/add" method="post">
 
-			<div id="price-field" class="price"></div>
-		  
-			<select id="variant-select" name="id" class="product-info-options">
+      <div id="price-field" class="price"></div>
+      
+      <select id="variant-select" name="id" class="product-info-options">
         {% for variant in product.variants %}
           <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
         {% endfor %}
-			</select>
-		
-			<div class="addtocart"><input type="image" name="add" value="Add to Cart" id="add" src="{{ 'add_to_cart.gif' | asset_url }}" /></div>
-		</form>
+      </select>
+    
+      <div class="addtocart"><input type="image" name="add" value="Add to Cart" id="add" src="{{ 'add_to_cart.gif' | asset_url }}" /></div>
+    </form>
               {% else %}
                   <span>Sold Out!</span>
               {% endif %}
-	  </div>
-	  
-	  <div class="description textile">
-		{{ product.description }}
-	  </div>
+    </div>
+    
+    <div class="description textile">
+    {{ product.description }}
+    </div>
   </div>
 </div>
 

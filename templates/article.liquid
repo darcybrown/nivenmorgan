@@ -18,10 +18,10 @@
         {{ comment.content }}
       </div>
       
-  	  <div class="comment-details">
-  		  Posted by {{ comment.author }} on {{ comment.created_at | date: "%B %d, %Y" }}
+      <div class="comment-details">
+        Posted by {{ comment.author }} on {{ comment.created_at | date: "%B %d, %Y" }}
       </div>
-  	</li>
+    </li>
   {% endfor %}
   </ul>
   
