@@ -1,55 +1,57 @@
-<div id="productpage">
-
-  <div id="productimages"><div id="productimages-top"><div id="productimages-bottom">
-    {% for image in product.images %}
-      {% if forloop.first %}
-        <a href="{{ image | product_img_url: 'large' }}" class="productimage" rel="lightbox" title="{{product.title | escape }}">
-          <img src="{{ image | product_img_url: 'medium'}}" alt="{{product.title | escape }}" />
-        </a>
-      {% else %}
-        <a href="{{ image | product_img_url: 'large' }}" class="productimage-small" rel="lightbox" title="{{product.title | escape }}">
-          <img src="{{ image | product_img_url: 'small'}}" alt="{{product.title | escape }}" />
-        </a>
-      {% endif %}
-    {% endfor %}
-  </div></div></div>
-
-  <div id="productdetails">
-    <h2>{{ product.title }}</h2>
-    
-    <ul id="details" class="hlist">
-    <li>Vendor: {{ product.vendor | link_to_vendor }}</li>
-    <li>Type: {{ product.type | link_to_type }}</li>
-    </ul>
-    
-    <small>{{ product.price_min | money }}{% if product.price_varies %} - {{ product.price_max | money }}{% endif %}</small>
-    
-    <div id="productcontrols">
-              {% if product.available %}
-
-    <form action="/cart/add" method="post">
-
-      <div id="price-field" class="price"></div>
-      
-      <select id="variant-select" name="id" class="product-info-options">
-        {% for variant in product.variants %}
-          <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
-        {% endfor %}
-      </select>
-    
-      <div class="addtocart"><input type="image" name="add" value="Add to Cart" id="add" src="{{ 'add_to_cart.gif' | asset_url }}" /></div>
-    </form>
-              {% else %}
-                  <span>Sold Out!</span>
-              {% endif %}
+<div id="content">
+  <div class="box">
+    <div class="image">
+        {% if product.images[1] %}
+            <img src="{{ product.images[1] | product_img_url: 'original'}}" alt="{{product.title | escape }}" />
+        {% endif %}
     </div>
-    
-    <div class="description textile">
-    {{ product.description }}
+    {% if collection %}            
+      <div class="back">
+        <a href="{{ collection.url }}">Back</a>
+      </div>
+    {% endif %}
+    <div class="content-box">
+      <h3>{{ product.title }} <span>{{ product.variants.first.price | money }}</span></h3>
+      <p>{{ product.description }}</p>
+      
+      {% if product.available %}
+        <form action="/cart/add" method="post">
+          <input type="hidden" id="variant-select" name="id" value="{{ product.variants.first.id}}">
+          <!-- <p>{{ product.variants.first.title}}</p> -->
+        <input type="image" name="add" value="Add to Cart" id="add" src="{{ 'add.gif' | asset_url }}" />
+        </form>
+      {% else %}
+          <span>Sold Out!</span>
+      {% endif %}
     </div>
   </div>
 </div>
-
+<div id="sidebar">
+  {% if collection %}            
+    <div class="title">
+      <h2>{{ collection.title }}</h2>
+    </div>
+    <p>{{ collection.description }}</p>
+  {% endif %}
+</div>
+{% if collection %}            
+<div class="more-products">
+  <div class="top">
+    <a href="{{ collection.url }}" class="title">More {{ collection.title }} Products</a>
+  </div>
+  <ul class="product">
+    {% for cproduct in collection.products %}
+      <li><a href="{{cproduct.url | within: collection}}"><img src="{{ cproduct.featured_image | product_img_url: 'original' }}" />
+          <strong>
+            {{ cproduct.title }}
+            <span>{{ cproduct.variants.first.price | money }}</span>
+          </strong>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+</div>
 <script type="text/javascript">
 <!--
   // prototype callback for multi variants dropdown selector

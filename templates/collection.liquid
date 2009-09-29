@@ -1,26 +1,19 @@
-<div id="collectionpage">
-  {% paginate collection.products by 20 %}
-  
-  <div id="pagination">
-    {{ paginate | default_pagination }}
+  <div id="content">
+      {% for product in collection.products %}
+      {% if forloop.first %}
+        <ul class="product">
+      {% endif %}
+        <li>
+          <a href="{{product.url | within: collection }}"><img src="{{ product.featured_image | product_img_url: 'original' }}" /><strong>{{ product.title }}<span>{{ product.variants.first.price | money }}</span></strong></a>
+        </li>
+      {% if forloop.last %}
+        </ul>
+      {% endif %}
+      {% endfor %}
   </div>
-  
-  <h2>{{ collection.title }}</h2>
-  
-  <ul id="product-collection">
-    {% for product in collection.products %}
-    <li class="singleproduct clearfix">
-      <div class="small">
-      <div class="prodimage"><a href="{{product.url}}"><img src="{{ product.featured_image | product_img_url: 'small' }}" /></a></div>
-      </div>
-      <div class="productdetails">
-      <h3><a href="{{product.url}}">{{product.title}}</a></h3>
-      <div class="description">{{ product.description | strip_html | truncatewords: 35 }}</div>
-      <p class="money">{{ product.price_min | money }}{% if product.price_varies %} - {{ product.price_max | money }}{% endif %}</p>
-     </div>
-    </li>
-    {% endfor %}
-  </ul>
-    
-  {% endpaginate %}
-</div>
+  <div id="sidebar">
+    <div class="title">
+      <h2>{{ collection.title}}</h2>
+    </div>
+    <p>{{ collection.description }}</p>
+  </div>

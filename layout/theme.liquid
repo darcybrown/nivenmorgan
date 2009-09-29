@@ -36,7 +36,7 @@
         <form action="/search" method="get">
           <fieldset>
             <div class="wrap">
-              <input input id="search-input" type="text" name="q" type="text" class="text" value="Enter Search Terms"/>
+              <input input id="search-input" type="text" name="q" type="text" class="text" value=""/>
             </div>
             <input type="image" class="btn" src="{{ 'search.gif' | asset_url }}" alt="Search"/>
             <a href="/cart" class="cart">Your Cart</a>
@@ -44,29 +44,22 @@
         </form>
       </div>
       <ul>
-        {% for link in linklists.main-menu.links %}
-           <li>{{ link.title | link_to: link.url }}</li>
+        {% for collection in collections %}
+           <li>{{ collection.title | link_to: collection.url }}</li>
         {% endfor %}
       </ul>
     </div>
     <div id="main">
-      <div id="content">
         {{ content_for_layout }}
-      </div>
     </div>
-  </div>
-  <div id="footer">
-    <ul>
-      
-      <li><a href="#">About</a></li>
-      <li><a href="#">Press</a></li>
-      <li><a href="#">Shipping</a></li>
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Store Locator</a></li>
-      <li><a href="#">Friends of Niven</a></li>
-    </ul>
-    <p>&copy; 2009 Niven Morgan All Rights Reserved.</p>
+    <div id="footer">
+      <ul>
+        {% for link in linklists.footer.links %}
+          <li>{{ link.title | link_to: link.url }}</li>
+        {% endfor %} 
+      </ul>
+      <p>&copy; 2009 Niven Morgan All Rights Reserved.</p>
+    </div>
   </div>
 </div>
 
