@@ -124,7 +124,6 @@ form,fieldset{
   margin:0;
   font-size:29px;
   line-height:32px;
-  color:#cc9966;
   font-weight:normal;
 }
 .title {
@@ -168,8 +167,8 @@ form,fieldset{
   overflow:hidden;
 }
 #content .box .image {
-  width:147px;
-  padding-left:48px;
+  width:296px;
+/*  padding-left:48px;*/
   overflow:hidden;
   float:left;
 }
@@ -183,7 +182,7 @@ form,fieldset{
 #content .box .content-box {
   width:290px;
   float:left;
-  padding-left:94px;
+/*  padding-left:94px;*/
   overflow:hidden;
 }
 #content .box .content-box h3 {
@@ -212,7 +211,8 @@ form,fieldset{
   background:url(add.gif) no-repeat;
 }
 #content .box .back {
-  width:492px;
+/*  width:492px;*/
+  width:390px;
   float:right;
   overflow:hidden;
   font-size:14px;
@@ -461,3 +461,10 @@ form,fieldset{
 }
 
 .hide {display:none;}
+
+#sidebar h2.gold, #header ul li.gold a:hover { color:#c96; }
+#sidebar h2.blue, #header ul li.blue a:hover { color:#6cf; }
+#sidebar h2.silver, #header ul li.silver a:hover { color:#999; }
+#sidebar h2.lavender, #header ul li.lavender a:hover { color:#96c; }
+#sidebar h2.candles, #header ul li.candles a:hover { color:#999; }
+#sidebar h2.kitchen, #header ul li.kitchen a:hover { color:#f60; }

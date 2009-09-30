@@ -45,7 +45,7 @@
       </div>
       <ul>
         {% for collection in collections %}
-           <li>{{ collection.title | link_to: collection.url }}</li>
+           <li class="{{ collection.title | downcase }}">{{ collection.title | link_to: collection.url }}</li>
         {% endfor %}
       </ul>
     </div>
