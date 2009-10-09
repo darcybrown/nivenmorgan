@@ -1,6 +1,7 @@
 body{
   margin:0;
   font:12px/14px Helvetica,Arial,sans-serif;
+  color:#666;
 }
 /* General reset */
 img{border-style:none;}
@@ -468,3 +469,8 @@ form,fieldset{
 #sidebar h2.lavender, #header ul li.lavender a:hover { color:#96c; }
 #sidebar h2.candles, #header ul li.candles a:hover { color:#999; }
 #sidebar h2.kitchen, #header ul li.kitchen a:hover { color:#f60; }
+
+#page.shipping {width:380px; float:left;}
+#page.about {width:620px; float:right;}
+img.about-niven {padding-top:16px;}
+input.submit-checkout {float:right;}
