@@ -1,0 +1,153 @@
+<script>
+
+  // csv header:  Customer,Phone,City,State,Ship To Street1,Ship To Street2,Ship To Zip,
+  var state_csv_index = 3;
+  var city_csv_index = 2;
+
+  var xmlhttp;
+  var stores=new Hash(); 
+  // [
+  //  "CA" => [
+  //    ["Los Angeles", [store]],
+  //    ["San Deigo", [store,store]]
+  //  ]
+  //  "TX" => [
+  //    ["Austin", [store,store,store]  ]
+  //    ["Dallas", [store,store,store] ]
+  //  ],
+  // ]
+  
+  function loadXMLDoc(url) { 
+    xmlhttp=null;
+    if (window.XMLHttpRequest) {// code for Firefox, Opera, IE7, etc.
+      xmlhttp=new XMLHttpRequest();
+    } else if (window.ActiveXObject) {// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    if (xmlhttp!=null) {
+      xmlhttp.onreadystatechange=state_Change;
+      xmlhttp.open("GET",url,true);
+      xmlhttp.send(null);
+    } else {
+      alert("Your browser does not support XMLHTTP.");
+    }
+  }
+
+  function state_Change() {
+    if (xmlhttp.readyState==4) {// 4 = "loaded"
+      if (xmlhttp.status==200 || xmlhttp.status == "200") {// 200 = "OK"
+        parseCSV(xmlhttp.responseText);
+        showStates();        
+      } else {
+        alert("Problem retrieving stores.");
+      }
+      $('loader').hide();
+    }
+  }
+  loadXMLDoc('/pages/stores');
+
+  function parseCSV(csv) {
+    var rows = csv.split(/\n|\n\r/);
+    var state = "";
+    var city = "";
+    for (var i=2; i< rows.length; i++) { //ignore header row
+      data = parseCSVLine(rows[i]); 
+      state = data[state_csv_index];
+      city = data[city_csv_index];
+      // console.log('State:'+state+' City:'+city);
+      if (!stores.get(state)) {
+        stores.set(state, new Hash());
+        // console.log("added state hash: "+state);
+      }
+      if (!stores.get(state).get(city)) {
+        stores.get(state).set(city, []);
+        // console.log("added city hash: "+city);
+      }
+      stores.get(state).get(city)[stores.get(state).get(city).length]= data;
+      // console.log('Added:'+data);
+    }
+  }
+  
+  parseCSVLine = function (line) //taken and modified from http://forums.devshed.com/javascript-development-115/parse-a-csv-line-with-a-regular-expression-517435.html
+  {
+      var tmp = [];
+      var inQuote = false;
+      var parNum = 0;
+      for (var i=0, len = line.length; i < len; i++)
+      {
+          var c = line.charAt(i);
+          if (c == "\"")
+          {
+              inQuote = !inQuote;
+              // if (!tmp[parNum]) tmp[parNum] = c;
+              // else tmp[parNum] += c;
+          }
+          else if (c == "," && !inQuote)
+          {
+              parNum++;
+          }
+          else 
+          {
+              if (!tmp[parNum]) tmp[parNum] = c;
+              else tmp[parNum] += c;
+          }
+      }
+
+      return tmp;
+  };
+  
+  function updated_state() {
+    $('cities').options.length=0;
+    $('cities').options[0] = new Option('choose a city...', 'choose', true, false);
+    state = $F('states');
+    cities = stores.get(state);
+    for (var i=0; i<cities.keys().length; i++) {
+      $('cities').options[$('cities').options.length] = new Option(cities.keys()[i], cities.keys()[i], false, false);
+    }
+    $('stores').hide();
+  }
+  function updated_city() {
+    $('stores').hide();
+    $('stores').innnerHTML="";
+    state = $F('states');
+    city = $F('cities');
+    activestores = stores.get(state).get(city);
+    var storecontainer  = new Element('ul', { 'class': 'active-stores' });
+    for (var i=0; i<activestores.length; i++) {
+      var info = "<strong>"+activestores[i][0]+"</strong><br />";
+      info += activestores[i][1] + "<br />";
+      info += activestores[i][4] + "<br />";
+      // info += activestores[i][4] + "<br />";
+      info += activestores[i][2] +", "+ activestores[i][3] + " "+ activestores[i][6] + "<br />";
+      info += "<a target='map' href='http://maps.google.com/maps?q="+activestores[i][0]+"+"+activestores[i][4]+"+"+activestores[i][2]+",+"+activestores[i][3]+"+"+activestores[i][6]+"'>map</a>"
+      storecontainer.appendChild(new Element('li').update(info));
+    }
+    $('stores').update(storecontainer);
+    $('stores').show();
+  }
+  function showStates() {
+    $('states').options.length=0;
+    $('states').options[0] = new Option('choose a state...', 'choose', true, false);
+    for (var i=0; i<stores.keys().length; i++) {
+      $('states').options[$('states').options.length] = new Option(stores.keys()[i], stores.keys()[i], false, false);
+    }
+    $('locator').show();
+    $('stores').hide();
+  }
+</script>
+<div id="page-part" class='{{ page.handle }}'>
+  {% capture file_name %}{{ page.handle }}.gif{% endcapture %}
+  <h2><img src="{{ file_name | asset_url }}" alt="{{page.title}}"/></h2>
+
+  <div class="article textile">
+    <div id="locator" style="display:none">
+      <form>
+        <select id="states" onchange='updated_state()'></select>
+        <select id="cities" onchange='updated_city()'></select>
+      </form>
+    </div>
+    <div id="stores" style="display:none"></div>
+    <div id ="loader"><img src="{{ 'ajax-loader.gif' | asset_url }}" alt="{{page.title}}"/></div>
+  </div>
+
+</div>

@@ -237,14 +237,14 @@ form,fieldset{
 }
 #main ul.product li {
   float:left;
-  padding:0 40px 3px 0;
+  padding:0 35px 3px 0;
 }
 #main ul.product li img {
   display:block;
 }
 #main ul.product li a {
   display:block;
-  width:142px;
+  width:145px;
   height:196px;
   padding-bottom:8px;
   cursor:pointer;
@@ -256,14 +256,16 @@ form,fieldset{
   text-decoration:underline;
 }
 #main ul.product li a strong {
-  position:absolute;
+/*  position:absolute;*/
   bottom:2px;
-  width:152px;
+  width:145px;
   margin:0 0 0 -6px;
   text-align:center;
   font-size:12px;
   line-height:14px;
   color:#999;
+  display:block;
+  height:40px;
 }
 #main ul.product li a strong span {
   font-size:11px;
@@ -470,7 +472,11 @@ form,fieldset{
 #sidebar h2.candles, #header ul li.candles a:hover { color:#999; }
 #sidebar h2.kitchen, #header ul li.kitchen a:hover { color:#f60; }
 
-#page.shipping {width:380px; float:left;}
-#page.about {width:620px; float:right;}
+#page-part.shipping {width:380px; float:left;}
+#page-part.about {width:620px; float:right;}
 img.about-niven {padding-top:16px;}
 input.submit-checkout {float:right;}
+
+ul.active-stores { padding:0; margin:0; list-style-image:none;list-style-type:none;list-style-position:outside;}
+ul.active-stores li {float:left;margin:0;padding:20px 0 0;width:200px;line-height:18px;}
+.locator input {padding-right:20px;}
