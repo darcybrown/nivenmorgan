@@ -480,3 +480,6 @@ input.submit-checkout {float:right;}
 ul.active-stores { padding:0; margin:0; list-style-image:none;list-style-type:none;list-style-position:outside;}
 ul.active-stores li {float:left;margin:0;padding:20px 0 0;width:200px;line-height:18px;}
 .locator input {padding-right:20px;}
+
+#page-part h2 {margin-top:15px;}
+div.about-image {width:280px;float:left;}

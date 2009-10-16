@@ -1,7 +1,7 @@
-<img src="{{ 'about-niven.jpg' | asset_url }}" alt="Niven" class="about-niven"/>
+<div class="about-image"><img src="{{ 'about-niven.jpg' | asset_url }}" alt="Niven" class="about-niven" width="280"/></div>
 <div id="page-part" class='{{ page.handle }}'>
   {% capture file_name %}{{ page.handle }}.gif{% endcapture %}
-  <h2><img src="{{ file_name | asset_url }}" alt="{{page.title}}"/></h2>
+  <h2><img src="{{ file_name | asset_url }}" alt="{{page.title}}" /></h2>
 
   <div class="article textile">
     {{page.content}}
