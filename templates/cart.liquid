@@ -17,7 +17,7 @@
   <div class="checkout">
     <a href="/" class="continue">Continue Shopping</a>
     <input type="image" value="Checkout!" name="checkout" class="submit-checkout" src="{{ 'checkout.gif' | asset_url }}" />
-    <!-- <a href="#" class="check">Check Out</a> -->
+    <!-- <div class="options">{{ content_for_additional_checkout_buttons }}</div> -->
   </div>
   <div class="top">
     <span>Product</span>
@@ -55,12 +55,7 @@
   <div class="checkout">
     <a href="/" class="continue">Continue Shopping</a>
     <input type="image" value="Checkout!" name="checkout" class="submit-checkout" src="{{ 'checkout.gif' | asset_url }}" />
-    <!-- <a href="#" class="check">Check Out</a> -->
+    <!-- <div class="options">{{ content_for_additional_checkout_buttons }}</div> -->
   </div>
 </div>
-<!--
-<div class="additional-checkout-buttons">
-  {{ content_for_additional_checkout_buttons }}
-</div>
--->
 {% endif %}

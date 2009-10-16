@@ -313,6 +313,9 @@ form,fieldset{
   margin-top:9px;
   overflow:hidden;
 }
+#main .trade .checkout .options {
+  float:right;
+}
 #main .trade .checkout a.continue {
   display:block;
   float:left;
