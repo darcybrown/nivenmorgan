@@ -5,8 +5,8 @@ body{
 }
 /* General reset */
 img{border-style:none;}
-a{color:#000;}
-a:hover{text-decoration:none;}
+a{color:#999;text-decoration:none;}
+a:hover{text-decoration:underline;}
 input,
 textarea,
 select{
@@ -475,9 +475,9 @@ form,fieldset{
 #sidebar h2.candles, #header ul li.candles a:hover { color:#999; }
 #sidebar h2.kitchen, #header ul li.kitchen a:hover { color:#f60; }
 
-#page-part.shipping {width:380px; float:left;}
+#page-part.online-retailers, #page-part.shipping, #page-part.privacy, #page-part.contact {width:546px; float:left;}
 #page-part.about {width:620px; float:right;}
-img.about-niven {padding-top:16px;}
+img.about-niven {padding-top:58px;}
 input.submit-checkout {float:right;}
 
 ul.active-stores { padding:0; margin:0; list-style-image:none;list-style-type:none;list-style-position:outside;}
@@ -486,3 +486,4 @@ ul.active-stores li {float:left;margin:0;padding:20px 0 0;width:200px;line-heigh
 
 #page-part h2 {margin-top:15px;}
 div.about-image {width:280px;float:left;}
+#page-page .article table {width:380px;margin:0;padding:0;}
