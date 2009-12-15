@@ -52,10 +52,15 @@
   <div class="subtotal">
     <strong>Subtotal:</strong> {{ cart.total_price | money_with_currency }}
   </div>
+<p>
+  <label for="note">Gift note:</label><br/>
+  <textarea name="note" id="note" rows="3" cols="60">{{cart.note}}</textarea>
+</p>
   <div class="checkout">
     <a href="/" class="continue">Continue Shopping</a>
     <input type="image" value="Checkout!" name="checkout" class="submit-checkout" src="{{ 'checkout.gif' | asset_url }}" />
     <!-- <div class="options">{{ content_for_additional_checkout_buttons }}</div> -->
   </div>
 </div>
+</form>
 {% endif %}
